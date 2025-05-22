@@ -220,8 +220,9 @@ const UploadSection: React.FC<UploadSectionProps> = ({ onClassificationComplete 
             <img
               src={preview}
               alt="Imagen de residuo subido"
-              className="w-full object-cover max-h-96"
+              className="w-full max-h-[500px] object-contain bg-white"
             />
+
             <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-4 flex justify-between items-center">
               <div className="flex space-x-2">
                 <button

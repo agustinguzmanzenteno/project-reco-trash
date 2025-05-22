@@ -1,5 +1,10 @@
 import React from 'react';
-import { Box, Recycle, Trash2, GlassWater, FileText } from 'lucide-react';
+import basuraImg from '../assets/basura.png';
+import cartonImg from '../assets/carton.png';
+import metalImg from '../assets/metal.png';
+import papelImg from '../assets/papel.png';
+import plasticoImg from '../assets/plastico.png';
+import vidrioImg from '../assets/vidrio.png';
 
 interface ResultCategory {
   id: string;
@@ -23,53 +28,53 @@ const ResultsSection: React.FC<ResultsSectionProps> = ({ prediction, confidence 
       name: 'Cartón',
       confidence: confidence || 0,
       description: 'Material de embalaje reciclable hecho de pulpa de papel.',
-      icon: <Box className="w-6 h-6" />,
-      color: 'text-amber-700 bg-amber-100 dark:bg-amber-900/30',
-      disposalTips: 'Aplana las cajas y deposita en el contenedor azul. Asegúrate de que esté limpio y seco.'
+      icon: <img src={cartonImg} alt="Cartón" className="w-6 h-6" />,
+      color: 'text-gray-500 bg-gray-100 dark:bg-gray-900/30',
+      disposalTips: 'Aplana las cajas y deposita en el contenedor. Asegúrate de que esté limpio y seco.'
     },
     'VIDRIO': {
       id: 'vidrio',
       name: 'Vidrio',
       confidence: confidence || 0,
       description: 'Material reciclable transparente o de color.',
-      icon: <GlassWater className="w-6 h-6" />,
-      color: 'text-green-500 bg-green-100 dark:bg-green-900/30',
-      disposalTips: 'Deposita en el contenedor verde. Retira tapas y enjuaga antes de reciclar.'
+      icon: <img src={vidrioImg} alt="Vidrio" className="w-6 h-6" />,
+      color: 'text-gray-500 bg-gray-100 dark:bg-gray-900/30',
+      disposalTips: 'Deposita en el contenedor. Retira tapas y enjuaga antes de reciclar.'
     },
     'METAL': {
       id: 'metal',
       name: 'Metal',
       confidence: confidence || 0,
       description: 'Materiales metálicos como latas y envases de aluminio.',
-      icon: <Recycle className="w-6 h-6" />,
-      color: 'text-gray-500 bg-gray-100 dark:bg-gray-900/30',
-      disposalTips: 'Deposita en el contenedor amarillo. Aplasta las latas para ahorrar espacio.'
+      icon: <img src={metalImg} alt="Metal" className="w-6 h-6" />,
+      color: 'text-yellow-500 bg-yellow-100 dark:bg-yellow-900/30',
+      disposalTips: 'Deposita en el contenedor. Aplasta las latas para ahorrar espacio.'
     },
     'PAPEL': {
       id: 'papel',
       name: 'Papel',
       confidence: confidence || 0,
       description: 'Material reciclable hecho de fibras de celulosa.',
-      icon: <FileText className="w-6 h-6" />,
-      color: 'text-blue-500 bg-blue-100 dark:bg-blue-900/30',
-      disposalTips: 'Deposita en el contenedor azul. Mantén separado de otros materiales.'
+      icon: <img src={papelImg} alt="Papel" className="w-6 h-6" />,
+      color: 'text-gray-500 bg-gray-100 dark:bg-gray-900/30',
+      disposalTips: 'Deposita en el contenedor. Mantén separado de otros materiales.'
     },
     'PLÁSTICO': {
       id: 'plastico',
       name: 'Plástico',
       confidence: confidence || 0,
       description: 'Material sintético reciclable como botellas y envases.',
-      icon: <Recycle className="w-6 h-6" />,
-      color: 'text-yellow-500 bg-yellow-100 dark:bg-yellow-900/30',
-      disposalTips: 'Deposita en el contenedor amarillo. Aplasta los envases para reducir volumen.'
+      icon: <img src={plasticoImg} alt="Plástico" className="w-6 h-6" />,
+      color: 'text-blue-500 bg-blue-100 dark:bg-blue-900/30',
+      disposalTips: 'Deposita en el contenedor. Aplasta los envases para reducir volumen.'
     },
     'BASURA': {
       id: 'basura',
       name: 'Basura',
       confidence: confidence || 0,
       description: 'Residuos que no pueden ser reciclados.',
-      icon: <Trash2 className="w-6 h-6" />,
-      color: 'text-gray-500 bg-gray-100 dark:bg-gray-700',
+      icon: <img src={basuraImg} alt="Basura" className="w-6 h-6" />,
+      color: 'text-red-500 bg-red-100 dark:bg-red-700',
       disposalTips: 'Deposita en el contenedor de restos. Intenta minimizar este tipo de residuos.'
     }
   };

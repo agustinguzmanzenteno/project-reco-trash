@@ -1,5 +1,11 @@
 import React from 'react';
-import { History, Trash2, Box, GlassWater, FileText, Recycle } from 'lucide-react';
+import basuraImg from '../assets/basura.png';
+import cartonImg from '../assets/carton.png';
+import metalImg from '../assets/metal.png';
+import papelImg from '../assets/papel.png';
+import plasticoImg from '../assets/plastico.png';
+import vidrioImg from '../assets/vidrio.png';
+import { History, Trash2 } from 'lucide-react';
 
 interface HistoryItem {
   id: string;
@@ -18,31 +24,32 @@ const HistorySection: React.FC<HistorySectionProps> = ({ history, onClearHistory
   const getIcon = (prediction: string) => {
     switch (prediction) {
       case 'CARTÓN':
-        return <Box className="w-5 h-5" />;
+        return <img src={cartonImg} alt="Cartón" className="w-5 h-5" />;
       case 'VIDRIO':
-        return <GlassWater className="w-5 h-5" />;
+        return <img src={vidrioImg} alt="Vidrio" className="w-5 h-5" />;
       case 'PAPEL':
-        return <FileText className="w-5 h-5" />;
+        return <img src={papelImg} alt="Papel" className="w-5 h-5" />;
       case 'METAL':
+        return <img src={metalImg} alt="Metal" className="w-5 h-5" />;
       case 'PLÁSTICO':
-        return <Recycle className="w-5 h-5" />;
+        return <img src={plasticoImg} alt="Plástico" className="w-5 h-5" />;
       default:
-        return <Trash2 className="w-5 h-5" />;
+        return <img src={basuraImg} alt="Basura" className="w-5 h-5" />;
     }
   };
 
   const getColorClass = (prediction: string) => {
     switch (prediction) {
       case 'CARTÓN':
-        return 'text-amber-700 bg-amber-100 dark:bg-amber-900/30';
-      case 'VIDRIO':
-        return 'text-green-500 bg-green-100 dark:bg-green-900/30';
-      case 'PAPEL':
-        return 'text-blue-500 bg-blue-100 dark:bg-blue-900/30';
-      case 'METAL':
         return 'text-gray-500 bg-gray-100 dark:bg-gray-900/30';
-      case 'PLÁSTICO':
+      case 'VIDRIO':
+        return 'text-gray-500 bg-gray-100 dark:bg-gray-900/30';
+      case 'PAPEL':
+        return 'text-gray-500 bg-gray-100 dark:bg-gray-900/30';
+      case 'METAL':
         return 'text-yellow-500 bg-yellow-100 dark:bg-yellow-900/30';
+      case 'PLÁSTICO':
+        return 'text-blue-500 bg-blue-100 dark:bg-blue-900/30';
       default:
         return 'text-gray-500 bg-gray-100 dark:bg-gray-700';
     }

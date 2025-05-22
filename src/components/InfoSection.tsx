@@ -1,5 +1,11 @@
 import React, { useState } from 'react';
-import { Recycle, Trash2, Battery, Leaf, BookOpen, Lightbulb, BrainCircuit } from 'lucide-react';
+import basuraImg from '../assets/basura.png';
+import cartonImg from '../assets/carton.png';
+import metalImg from '../assets/metal.png';
+import papelImg from '../assets/papel.png';
+import plasticoImg from '../assets/plastico.png';
+import vidrioImg from '../assets/vidrio.png';
+import { Recycle, BookOpen, Lightbulb, BrainCircuit } from 'lucide-react';
 
 interface InfoCardProps {
   title: string;
@@ -75,28 +81,64 @@ const InfoSection: React.FC = () => {
         {activeTab === 'categories' && (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <InfoCard
-              title="Reciclables"
-              description="Incluye papel, cartón, plásticos PET/HDPE, vidrio, aluminio y metales. Estos materiales pueden procesarse y convertirse en nuevos productos, reduciendo la necesidad de materias primas."
-              icon={<Recycle className="w-8 h-8 text-blue-500" />}
-              color="border-l-4 border-blue-500"
+              title="Basura"
+              description="Residuos no reciclables como papel sucio, colillas, envoltorios metalizados o productos sanitarios usados."
+              icon={
+                <div className="flex items-center space-x-2">
+                  <img src={basuraImg} alt="Basura" className="w-8 h-8" />
+                </div>
+              }
+              color="border-l-4 border-red-500"
             />
             <InfoCard
-              title="Orgánicos"
-              description="Restos de comida, cáscaras, café, hojas y otros materiales biodegradables. Se pueden compostar para crear abono natural rico en nutrientes para plantas y jardines."
-              icon={<Leaf className="w-8 h-8 text-green-500" />}
-              color="border-l-4 border-green-500"
+              title="Cartón"
+              description="Cajas, envases y tubos de cartón limpios y secos. Aplástalos para facilitar el reciclaje."
+              icon={
+                <div className="flex items-center space-x-2">
+                  <img src={cartonImg} alt="Cartón" className="w-8 h-8" />
+                </div>
+              }
+              color="border-l-4 border-gray-500"
             />
             <InfoCard
-              title="Peligrosos"
-              description="Baterías, productos químicos, medicamentos caducados, pinturas, aceites. Requieren procesamiento especial para evitar contaminar el medio ambiente o afectar la salud pública."
-              icon={<Battery className="w-8 h-8 text-yellow-500" />}
+              title="Metal"
+              description="Latas de bebidas, conservas y otros envases metálicos limpios y vacíos."
+              icon={
+                <div className="flex items-center space-x-2">
+                  <img src={metalImg} alt="Metal" className="w-8 h-8" />
+                </div>
+              }
               color="border-l-4 border-yellow-500"
             />
             <InfoCard
-              title="No Reciclables"
-              description="Algunos plásticos mixtos, productos de higiene usados, ciertos envoltorios metalizados. Actualmente tienen limitaciones técnicas o económicas para su reciclaje."
-              icon={<Trash2 className="w-8 h-8 text-gray-500" />}
+              title="Papel"
+              description="Hojas de papel, periódicos y revistas limpias. No incluir papel húmedo o sucio."
+              icon={
+                <div className="flex items-center space-x-2">
+                  <img src={papelImg} alt="Papel" className="w-8 h-8" />
+                </div>
+              }
               color="border-l-4 border-gray-500"
+            />
+            <InfoCard
+              title="Plástico"
+              description="Botellas PET, envases plásticos de limpieza o alimentos. Límpialos antes de reciclar."
+              icon={
+                <div className="flex items-center space-x-2">
+                  <img src={plasticoImg} alt="Plástico" className="w-8 h-8" />
+                </div>
+              }
+              color="border-l-4 border-blue-500"
+            />
+            <InfoCard
+              title="Vidrio"
+              description="Botellas y frascos de vidrio. No incluir espejos, bombillas o cerámica."
+              icon={
+                <div className="flex items-center space-x-2">
+                  <img src={vidrioImg} alt="Vidrio" className="w-8 h-8" />
+                </div>
+              }
+              color="border-l-4 border-gray-400"
             />
           </div>
         )}
@@ -112,7 +154,7 @@ const InfoSection: React.FC = () => {
                 </div>
                 <div>
                   <h4 className="font-medium text-gray-800 dark:text-white">Redes Neuronales Convolucionales</h4>
-                  <p className="text-gray-600 dark:text-gray-300">Nuestro sistema utiliza modelos avanzados de visión por computadora para identificar características visuales de diferentes tipos de residuos.</p>
+                  <p className="text-gray-600 dark:text-gray-300">Nuestro sistema utiliza un modelo de Machine Learning mediante visión por computadora para identificar características visuales de diferentes tipos de residuos.</p>
                 </div>
               </div>
               
@@ -121,8 +163,8 @@ const InfoSection: React.FC = () => {
                   <BookOpen className="w-6 h-6 text-blue-600" />
                 </div>
                 <div>
-                  <h4 className="font-medium text-gray-800 dark:text-white">Entrenamiento con Millones de Imágenes</h4>
-                  <p className="text-gray-600 dark:text-gray-300">El modelo ha sido entrenado con datasets extensos de diferentes tipos de residuos para reconocer patrones y características específicas.</p>
+                  <h4 className="font-medium text-gray-800 dark:text-white">Entrenamiento con Miles de Imágenes</h4>
+                  <p className="text-gray-600 dark:text-gray-300">El modelo ha sido entrenado con un dataset extenso que contiene diferentes tipos de residuos para reconocer patrones y características específicas.</p>
                 </div>
               </div>
               
