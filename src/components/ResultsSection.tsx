@@ -74,7 +74,7 @@ const ResultsSection: React.FC<ResultsSectionProps> = ({ prediction, confidence 
       confidence: confidence || 0,
       description: 'Residuos que no pueden ser reciclados.',
       icon: <img src={basuraImg} alt="Basura" className="w-6 h-6" />,
-      color: 'text-red-500 bg-red-100 dark:bg-red-700',
+      color: 'text-red-200 bg-red-100 dark:bg-red-500',
       disposalTips: 'Deposita en el contenedor de restos. Intenta minimizar este tipo de residuos.'
     }
   };

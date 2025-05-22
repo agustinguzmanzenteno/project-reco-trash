@@ -9,7 +9,7 @@ const Footer: React.FC = () => {
           <div className="flex items-center mb-4 md:mb-0">
             <Trash2 className="w-6 h-6 text-green-500 mr-2" />
             <span className="text-xl font-bold bg-gradient-to-r from-green-500 to-blue-500 bg-clip-text text-transparent">
-              EcoSort
+              RecoTrash
             </span>
           </div>
           
@@ -35,7 +35,7 @@ const Footer: React.FC = () => {
         <div className="border-t border-gray-200 dark:border-gray-700 mt-6 pt-6">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <p className="text-sm text-gray-500 dark:text-gray-400 mb-2 md:mb-0">
-              © 2025 EcoSort. Todos los derechos reservados.
+              © 2025 RecoTrash. Todos los derechos reservados.
             </p>
             
             <div className="flex space-x-6">
