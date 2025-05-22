@@ -17,6 +17,8 @@ const UploadSection: React.FC<UploadSectionProps> = ({ onClassificationComplete 
   const fileInputRef = useRef<HTMLInputElement>(null);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const webcamRef = useRef<Webcam>(null);
+  const [isClassifying, setIsClassifying] = useState(false);
+  const detectionInterval = useRef<ReturnType<typeof setInterval> | null>(null);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -63,26 +65,22 @@ const UploadSection: React.FC<UploadSectionProps> = ({ onClassificationComplete 
   };
 
   const handleClassify = async (imageData: string | File) => {
+    if (isClassifying) return;
+
+    setIsClassifying(true);
+    setProgress(0);
+
     const formData = new FormData();
-    
     if (imageData instanceof File) {
       formData.append('imagen', imageData);
     } else {
-      // Convert base64 to blob
       const response = await fetch(imageData);
       const blob = await response.blob();
       formData.append('imagen', blob, 'webcam-capture.jpg');
     }
 
-    setIsLoading(true);
-    setProgress(0);
-
-    intervalRef.current = setInterval(() => {
-      setProgress((prev) => (prev < 90 ? prev + 5 : prev));
-    }, 200);
-
     try {
-      const res = await fetch('http://localhost:3000/predecir', {
+      const res = await fetch('http://192.168.0.107:5000/predecir', {
         method: 'POST',
         body: formData,
       });
@@ -95,13 +93,9 @@ const UploadSection: React.FC<UploadSectionProps> = ({ onClassificationComplete 
       console.error(err);
       onClassificationComplete('ERROR', 0, imageData instanceof File ? preview! : imageData);
     } finally {
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current);
-      }
+      setIsClassifying(false);
       setProgress(100);
-      setTimeout(() => {
-        setIsLoading(false);
-      }, 500);
+      setTimeout(() => setProgress(0), 500);
     }
   };
 
@@ -122,6 +116,23 @@ const UploadSection: React.FC<UploadSectionProps> = ({ onClassificationComplete 
   const triggerFileInput = () => {
     fileInputRef.current?.click();
   };
+
+  React.useEffect(() => {
+    if (isWebcamActive) {
+      detectionInterval.current = setInterval(() => {
+        const imageSrc = webcamRef.current?.getScreenshot();
+        if (imageSrc && !isClassifying) {
+          handleClassify(imageSrc);
+        }
+      }, 3000);
+
+      return () => {
+        if (detectionInterval.current) {
+          clearInterval(detectionInterval.current);
+        }
+      };
+    }
+  }, [isWebcamActive, isClassifying]);
 
   return (
     <section id="upload" className="py-8 md:py-12">
