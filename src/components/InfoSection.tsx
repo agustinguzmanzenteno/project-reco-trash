@@ -122,7 +122,7 @@ const InfoSection: React.FC = () => {
             />
             <InfoCard
               title="Plástico"
-              description="Botellas PET, envases plásticos de limpieza o alimentos. Límpialos antes de reciclar."
+              description="Botellas, envases plásticos de limpieza o alimentos. Límpialos antes de reciclar."
               icon={
                 <div className="flex items-center space-x-2">
                   <img src={plasticoImg} alt="Plástico" className="w-8 h-8" />
@@ -182,11 +182,11 @@ const InfoSection: React.FC = () => {
             <div className="mt-6">
               <h4 className="font-semibold text-lg mb-2 text-gray-800 dark:text-white">Proceso de Clasificación</h4>
               <ol className="list-decimal pl-5 space-y-2 text-gray-600 dark:text-gray-300">
-                <li>La imagen es preprocesada para normalizar su tamaño y contraste</li>
-                <li>Se extraen características visuales clave mediante CNN</li>
-                <li>El modelo compara estas características con su base de conocimiento</li>
-                <li>Se calcula la probabilidad para cada categoría posible</li>
-                <li>Se presenta el resultado con el nivel de confianza asociado</li>
+                <li>La imagen se preprocesa: se cambia su tamaño, se convierte a formato tensorial y se normalizan los valores de píxeles para que el modelo pueda interpretarla correctamente.</li>
+                <li>Se utiliza un modelo de Redes Neuronales Convolucionales (CNN) avanzado basado en ResNet50, previamente entrenado con miles de imágenes de residuos, para extraer características visuales relevantes (bordes, formas, texturas).</li>
+                <li>Estas características se pasan por capas densas y convolucionales adicionales para identificar patrones que representen cada categoría.</li>
+                <li>El modelo genera una probabilidad para cada categoría usando una capa final, indicando qué tan probable es que la imagen pertenezca a cada tipo de residuo.</li>
+                <li>Finalmente, se selecciona la categoría con mayor probabilidad y se muestra el resultado junto con el nivel de confianza (precisión del modelo en esa predicción).</li>
               </ol>
             </div>
           </div>

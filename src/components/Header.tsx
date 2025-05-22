@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trash2, Info, History, Sun, Moon } from 'lucide-react';
+import { Trash2, Sun, Moon } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
 
 const Header: React.FC = () => {
@@ -15,20 +15,19 @@ const Header: React.FC = () => {
               RecoTrash
             </h1>
           </div>
-          
-          <nav className="hidden md:flex items-center space-x-6">
-            <a href="#upload" className="text-gray-700 dark:text-gray-200 hover:text-green-500 dark:hover:text-green-400 transition-colors duration-200">
-              Clasificar
-            </a>
-            <a href="#info" className="text-gray-700 dark:text-gray-200 hover:text-green-500 dark:hover:text-green-400 transition-colors duration-200">
-              Aprende
-            </a>
-            <a href="#history" className="text-gray-700 dark:text-gray-200 hover:text-green-500 dark:hover:text-green-400 transition-colors duration-200">
-              Historial
-            </a>
-          </nav>
-          
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-6 ml-auto">
+            <nav className="hidden md:flex items-center space-x-6">
+              <a href="#upload" className="text-gray-700 dark:text-gray-200 hover:text-green-500 dark:hover:text-green-400 transition-colors duration-200">
+                Clasificar
+              </a>
+              <a href="#info" className="text-gray-700 dark:text-gray-200 hover:text-green-500 dark:hover:text-green-400 transition-colors duration-200">
+                Aprende
+              </a>
+              <a href="#history" className="text-gray-700 dark:text-gray-200 hover:text-green-500 dark:hover:text-green-400 transition-colors duration-200">
+                Historial
+              </a>
+            </nav>
+
             <button 
               onClick={toggleTheme}
               className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200"

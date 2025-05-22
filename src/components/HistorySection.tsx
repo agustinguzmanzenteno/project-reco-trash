@@ -56,7 +56,19 @@ const HistorySection: React.FC<HistorySectionProps> = ({ history, onClearHistory
   };
 
   if (history.length === 0) {
-    return null;
+    return (
+      <section id="history" className="py-8">
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden transition-colors duration-300">
+          <div className="p-6 text-center">
+            <History className="w-8 h-8 mx-auto text-green-500 mb-2" />
+            <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-2">Historial vacío</h2>
+            <p className="text-gray-600 dark:text-gray-300">
+              Aún no has clasificado ningún residuo. Cuando lo hagas, los resultados aparecerán aquí.
+            </p>
+          </div>
+        </div>
+      </section>
+    );
   }
 
   return (
