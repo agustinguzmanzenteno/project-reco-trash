@@ -18,9 +18,10 @@ import {
 
 interface UploadSectionProps {
   onClassificationComplete: (prediction: string, confidence: number, imageUrl: string) => void;
+  onImageRemove: () => void;
 }
 
-const UploadSection: React.FC<UploadSectionProps> = ({ onClassificationComplete }) => {
+const UploadSection: React.FC<UploadSectionProps> = ({ onClassificationComplete, onImageRemove }) => {
   const [image, setImage] = useState<File | null>(null);
   const [preview, setPreview] = useState<string | null>(null);
   const [isDragging, setIsDragging] = useState(false);
@@ -75,6 +76,7 @@ const UploadSection: React.FC<UploadSectionProps> = ({ onClassificationComplete 
     if (fileInputRef.current) {
       fileInputRef.current.value = '';
     }
+    onImageRemove();
   };
 
   const handleClassify = async (imageData: string | File) => {

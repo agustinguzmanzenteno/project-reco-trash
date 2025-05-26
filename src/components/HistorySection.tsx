@@ -106,19 +106,14 @@ const HistorySection: React.FC<HistorySectionProps> = ({
         className="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden transition-colors duration-300"
       >
         <div className="p-6">
-          <motion.div
-            initial={{ x: -20, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            transition={{ delay: 0.2 }}
-            className="flex justify-between items-center mb-6"
-          >
+          <div className="flex justify-between items-center mb-6">
             <div className="flex items-center">
               <History className="w-6 h-6 text-green-500 mr-2" />
               <h2 className="text-2xl font-bold text-gray-800 dark:text-white">
                 Historial de Clasificaciones
               </h2>
             </div>
-          </motion.div>
+          </div>
 
           <div className="space-y-4">
             <AnimatePresence>

@@ -48,6 +48,11 @@ function App() {
     setHistory((prev) => prev.filter((item) => item.id !== id));
   };
 
+  const handleImageRemove = () => {
+    setCurrentPrediction(null);
+    setCurrentConfidence(null);
+  };
+
   return (
     <ThemeProvider>
       <div className="min-h-screen flex flex-col bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 dark:text-white transition-colors duration-300">
@@ -56,6 +61,7 @@ function App() {
           <div className="max-w-5xl mx-auto">
             <UploadSection
               onClassificationComplete={handleClassificationComplete}
+              onImageRemove={handleImageRemove}
             />
             <ResultsSection
               prediction={currentPrediction}
