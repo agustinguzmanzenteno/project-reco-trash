@@ -1,4 +1,5 @@
 import React from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import basuraImg from "../assets/basura.png";
 import cartonImg from "../assets/carton.png";
 import metalImg from "../assets/metal.png";
@@ -6,6 +7,17 @@ import papelImg from "../assets/papel.png";
 import plasticoImg from "../assets/plastico.png";
 import vidrioImg from "../assets/vidrio.png";
 import { History, Trash2 } from "lucide-react";
+import { 
+  fadeIn, 
+  fadeInLeft, 
+  fadeInUp, 
+  hoverScale, 
+  hoverScaleLarge, 
+  rotateAnimation, 
+  longTransition, 
+  delays,
+  animatePresenceConfig 
+} from "../utils/animations";
 
 interface HistoryItem {
   id: string;
@@ -60,10 +72,23 @@ const HistorySection: React.FC<HistorySectionProps> = ({
 
   if (history.length === 0) {
     return (
-      <section id="history" className="py-8">
-        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden transition-colors duration-300">
+      <motion.section
+        variants={fadeInUp}
+        initial="initial"
+        animate="animate"
+        transition={longTransition}
+        id="history"
+        className="py-8"
+      >
+        <motion.div
+          variants={hoverScale}
+          whileHover="hover"
+          className="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden transition-colors duration-300"
+        >
           <div className="p-6 text-center">
-            <History className="w-8 h-8 mx-auto text-green-500 mb-2" />
+            <motion.div variants={rotateAnimation}>
+              <History className="w-8 h-8 mx-auto text-green-500 mb-2" />
+            </motion.div>
             <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-2">
               Historial vacío
             </h2>
@@ -72,74 +97,105 @@ const HistorySection: React.FC<HistorySectionProps> = ({
               resultados aparecerán aquí.
             </p>
           </div>
-        </div>
-      </section>
+        </motion.div>
+      </motion.section>
     );
   }
 
   return (
-    <section id="history" className="py-8">
-      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden transition-colors duration-300">
+    <motion.section
+      variants={fadeInUp}
+      initial="initial"
+      animate="animate"
+      transition={longTransition}
+      id="history"
+      className="py-8"
+    >
+      <motion.div
+        variants={fadeIn}
+        initial="initial"
+        animate="animate"
+        className="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden transition-colors duration-300"
+      >
         <div className="p-6">
-          <div className="flex justify-between items-center mb-6">
+          <motion.div
+            variants={fadeInLeft}
+            initial="initial"
+            animate="animate"
+            transition={{ delay: delays.short }}
+            className="flex justify-between items-center mb-6"
+          >
             <div className="flex items-center">
               <History className="w-6 h-6 text-green-500 mr-2" />
               <h2 className="text-2xl font-bold text-gray-800 dark:text-white">
                 Historial de Clasificaciones
               </h2>
             </div>
-          </div>
+          </motion.div>
 
           <div className="space-y-4">
-            {history.map((item) => (
-              <div
-                key={item.id}
-                className="flex items-center space-x-4 p-4 bg-gray-50 dark:bg-gray-700/50 rounded-lg transition-colors duration-300"
-              >
-                <div className="w-16 h-16 rounded-lg overflow-hidden bg-gray-200 dark:bg-gray-600">
-                  <img
-                    src={item.imageUrl}
-                    alt="Imagen clasificada"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-
-                <div className="flex-grow">
-                  <div className="flex items-center space-x-2">
-                    <div
-                      className={`p-1.5 rounded-lg ${getColorClass(
-                        item.prediction
-                      )}`}
-                    >
-                      {getIcon(item.prediction)}
-                    </div>
-                    <span className="font-medium text-gray-800 dark:text-white">
-                      {item.prediction}
-                    </span>
-                    <span className="text-sm text-gray-500 dark:text-gray-400">
-                      ({item.confidence}% confianza)
-                    </span>
-                  </div>
-                  <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
-                    {new Date(item.timestamp).toLocaleString()}
-                  </p>
-                </div>
-                <button
-                  onClick={() => {
-                    onClearHistory(item.id);
-                    // Optionally, you can also remove the specific item from history
-                    // setHistory(prev => prev.filter(h => h.id !== item.id));
-                  }}
-                  className="text-red-500 hover:text-red-600 dark:text-red-400 dark:hover:text-red-300 transition-colors duration-200"
+            <AnimatePresence {...animatePresenceConfig}>
+              {history.map((item, index) => (
+                <motion.div
+                  key={item.id}
+                  variants={fadeInLeft}
+                  initial="initial"
+                  animate="animate"
+                  exit="exit"
+                  transition={{ delay: index * 0.1 }}
+                  whileHover="hover"
+                  className="flex items-center space-x-4 p-4 bg-gray-50 dark:bg-gray-700/50 rounded-lg transition-colors duration-300"
                 >
-                  <Trash2 className="w-5 h-5" />
-                </button>
-              </div>
-            ))}
+                  <motion.div
+                    variants={hoverScale}
+                    whileHover="hover"
+                    className="w-16 h-16 rounded-lg overflow-hidden bg-gray-200 dark:bg-gray-600"
+                  >
+                    <img
+                      src={item.imageUrl}
+                      alt="Imagen clasificada"
+                      className="w-full h-full object-cover"
+                    />
+                  </motion.div>
+
+                  <div className="flex-grow">
+                    <div className="flex items-center space-x-2">
+                      <motion.div
+                        variants={hoverScale}
+                        whileHover="hover"
+                        className={`p-1.5 rounded-lg ${getColorClass(
+                          item.prediction
+                        )}`}
+                      >
+                        {getIcon(item.prediction)}
+                      </motion.div>
+                      <span className="font-medium text-gray-800 dark:text-white">
+                        {item.prediction}
+                      </span>
+                      <span className="text-sm text-gray-500 dark:text-gray-400">
+                        ({item.confidence}% confianza)
+                      </span>
+                    </div>
+                    <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+                      {new Date(item.timestamp).toLocaleString()}
+                    </p>
+                  </div>
+                  <motion.button
+                    variants={hoverScaleLarge}
+                    whileHover="hover"
+                    whileTap="tap"
+                    onClick={() => onClearHistory(item.id)}
+                    className="text-red-500 hover:text-red-600 dark:text-red-400 dark:hover:text-red-300 transition-colors duration-200"
+                  >
+                    <Trash2 className="w-5 h-5" />
+                  </motion.button>
+                </motion.div>
+              ))}
+            </AnimatePresence>
           </div>
         </div>
-      </div>
-    </section>
+      </motion.div>
+    </motion.section>
   );
 };
 
