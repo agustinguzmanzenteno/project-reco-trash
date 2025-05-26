@@ -98,7 +98,7 @@ const InfoSection: React.FC = () => {
                   <img src={cartonImg} alt="Cartón" className="w-8 h-8" />
                 </div>
               }
-              color="border-l-4 border-gray-500"
+              color="border-l-4 border-orange-500"
             />
             <InfoCard
               title="Metal"

@@ -1,11 +1,11 @@
-import React from 'react';
-import basuraImg from '../assets/basura.png';
-import cartonImg from '../assets/carton.png';
-import metalImg from '../assets/metal.png';
-import papelImg from '../assets/papel.png';
-import plasticoImg from '../assets/plastico.png';
-import vidrioImg from '../assets/vidrio.png';
-import { History, Trash2 } from 'lucide-react';
+import React from "react";
+import basuraImg from "../assets/basura.png";
+import cartonImg from "../assets/carton.png";
+import metalImg from "../assets/metal.png";
+import papelImg from "../assets/papel.png";
+import plasticoImg from "../assets/plastico.png";
+import vidrioImg from "../assets/vidrio.png";
+import { History, Trash2 } from "lucide-react";
 
 interface HistoryItem {
   id: string;
@@ -17,21 +17,24 @@ interface HistoryItem {
 
 interface HistorySectionProps {
   history: HistoryItem[];
-  onClearHistory: () => void;
+  onClearHistory: (id: string) => void;
 }
 
-const HistorySection: React.FC<HistorySectionProps> = ({ history, onClearHistory }) => {
+const HistorySection: React.FC<HistorySectionProps> = ({
+  history,
+  onClearHistory,
+}) => {
   const getIcon = (prediction: string) => {
     switch (prediction) {
-      case 'CARTÓN':
+      case "CARTÓN":
         return <img src={cartonImg} alt="Cartón" className="w-5 h-5" />;
-      case 'VIDRIO':
+      case "VIDRIO":
         return <img src={vidrioImg} alt="Vidrio" className="w-5 h-5" />;
-      case 'PAPEL':
+      case "PAPEL":
         return <img src={papelImg} alt="Papel" className="w-5 h-5" />;
-      case 'METAL':
+      case "METAL":
         return <img src={metalImg} alt="Metal" className="w-5 h-5" />;
-      case 'PLÁSTICO':
+      case "PLÁSTICO":
         return <img src={plasticoImg} alt="Plástico" className="w-5 h-5" />;
       default:
         return <img src={basuraImg} alt="Basura" className="w-5 h-5" />;
@@ -40,18 +43,18 @@ const HistorySection: React.FC<HistorySectionProps> = ({ history, onClearHistory
 
   const getColorClass = (prediction: string) => {
     switch (prediction) {
-      case 'CARTÓN':
-        return 'text-gray-500 bg-gray-100 dark:bg-gray-900/30';
-      case 'VIDRIO':
-        return 'text-gray-500 bg-gray-100 dark:bg-gray-900/30';
-      case 'PAPEL':
-        return 'text-gray-500 bg-gray-100 dark:bg-gray-900/30';
-      case 'METAL':
-        return 'text-yellow-500 bg-yellow-100 dark:bg-yellow-900/30';
-      case 'PLÁSTICO':
-        return 'text-blue-500 bg-blue-100 dark:bg-blue-900/30';
+      case "CARTÓN":
+        return "text-gray-500 bg-gray-100 dark:bg-gray-900/30";
+      case "VIDRIO":
+        return "text-gray-500 bg-gray-100 dark:bg-gray-900/30";
+      case "PAPEL":
+        return "text-gray-500 bg-gray-100 dark:bg-gray-900/30";
+      case "METAL":
+        return "text-yellow-500 bg-yellow-100 dark:bg-yellow-900/30";
+      case "PLÁSTICO":
+        return "text-blue-500 bg-blue-100 dark:bg-blue-900/30";
       default:
-        return 'text-gray-500 bg-gray-100 dark:bg-gray-700';
+        return "text-gray-500 bg-gray-100 dark:bg-gray-700";
     }
   };
 
@@ -61,9 +64,12 @@ const HistorySection: React.FC<HistorySectionProps> = ({ history, onClearHistory
         <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden transition-colors duration-300">
           <div className="p-6 text-center">
             <History className="w-8 h-8 mx-auto text-green-500 mb-2" />
-            <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-2">Historial vacío</h2>
+            <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-2">
+              Historial vacío
+            </h2>
             <p className="text-gray-600 dark:text-gray-300">
-              Aún no has clasificado ningún residuo. Cuando lo hagas, los resultados aparecerán aquí.
+              Aún no has clasificado ningún residuo. Cuando lo hagas, los
+              resultados aparecerán aquí.
             </p>
           </div>
         </div>
@@ -78,14 +84,10 @@ const HistorySection: React.FC<HistorySectionProps> = ({ history, onClearHistory
           <div className="flex justify-between items-center mb-6">
             <div className="flex items-center">
               <History className="w-6 h-6 text-green-500 mr-2" />
-              <h2 className="text-2xl font-bold text-gray-800 dark:text-white">Historial de Clasificaciones</h2>
+              <h2 className="text-2xl font-bold text-gray-800 dark:text-white">
+                Historial de Clasificaciones
+              </h2>
             </div>
-            <button
-              onClick={onClearHistory}
-              className="text-red-500 hover:text-red-600 dark:text-red-400 dark:hover:text-red-300 transition-colors duration-200"
-            >
-              <Trash2 className="w-5 h-5" />
-            </button>
           </div>
 
           <div className="space-y-4">
@@ -101,10 +103,14 @@ const HistorySection: React.FC<HistorySectionProps> = ({ history, onClearHistory
                     className="w-full h-full object-cover"
                   />
                 </div>
-                
+
                 <div className="flex-grow">
                   <div className="flex items-center space-x-2">
-                    <div className={`p-1.5 rounded-lg ${getColorClass(item.prediction)}`}>
+                    <div
+                      className={`p-1.5 rounded-lg ${getColorClass(
+                        item.prediction
+                      )}`}
+                    >
                       {getIcon(item.prediction)}
                     </div>
                     <span className="font-medium text-gray-800 dark:text-white">
@@ -118,6 +124,16 @@ const HistorySection: React.FC<HistorySectionProps> = ({ history, onClearHistory
                     {new Date(item.timestamp).toLocaleString()}
                   </p>
                 </div>
+                <button
+                  onClick={() => {
+                    onClearHistory(item.id);
+                    // Optionally, you can also remove the specific item from history
+                    // setHistory(prev => prev.filter(h => h.id !== item.id));
+                  }}
+                  className="text-red-500 hover:text-red-600 dark:text-red-400 dark:hover:text-red-300 transition-colors duration-200"
+                >
+                  <Trash2 className="w-5 h-5" />
+                </button>
               </div>
             ))}
           </div>

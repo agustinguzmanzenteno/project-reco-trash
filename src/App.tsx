@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import { Trash2 } from 'lucide-react';
-import Header from './components/Header';
-import UploadSection from './components/UploadSection';
-import ResultsSection from './components/ResultsSection';
-import HistorySection from './components/HistorySection';
-import InfoSection from './components/InfoSection';
-import Footer from './components/Footer';
-import { ThemeProvider } from './context/ThemeContext';
+import React, { useState } from "react";
+import { Trash2 } from "lucide-react";
+import Header from "./components/Header";
+import UploadSection from "./components/UploadSection";
+import ResultsSection from "./components/ResultsSection";
+import HistorySection from "./components/HistorySection";
+import InfoSection from "./components/InfoSection";
+import Footer from "./components/Footer";
+import { ThemeProvider } from "./context/ThemeContext";
 
 interface HistoryItem {
   id: string;
@@ -17,27 +17,35 @@ interface HistoryItem {
 }
 
 function App() {
-  const [currentPrediction, setCurrentPrediction] = useState<string | null>(null);
-  const [currentConfidence, setCurrentConfidence] = useState<number | null>(null);
+  const [currentPrediction, setCurrentPrediction] = useState<string | null>(
+    null
+  );
+  const [currentConfidence, setCurrentConfidence] = useState<number | null>(
+    null
+  );
   const [history, setHistory] = useState<HistoryItem[]>([]);
 
-  const handleClassificationComplete = (prediction: string, confidence: number, imageUrl: string) => {
+  const handleClassificationComplete = (
+    prediction: string,
+    confidence: number,
+    imageUrl: string
+  ) => {
     setCurrentPrediction(prediction);
     setCurrentConfidence(confidence);
-    
+
     const newHistoryItem: HistoryItem = {
       id: Date.now().toString(),
       timestamp: new Date(),
       prediction,
       confidence,
-      imageUrl
+      imageUrl,
     };
-    
-    setHistory(prev => [newHistoryItem, ...prev]);
+
+    setHistory((prev) => [newHistoryItem, ...prev]);
   };
 
-  const handleClearHistory = () => {
-    setHistory([]);
+  const handleClearHistory = (id: string) => {
+    setHistory((prev) => prev.filter((item) => item.id !== id));
   };
 
   return (
@@ -46,9 +54,17 @@ function App() {
         <Header />
         <main className="flex-grow container mx-auto px-4 py-8">
           <div className="max-w-5xl mx-auto">
-            <UploadSection onClassificationComplete={handleClassificationComplete} />
-            <ResultsSection prediction={currentPrediction} confidence={currentConfidence} />
-            <HistorySection history={history} onClearHistory={handleClearHistory} />
+            <UploadSection
+              onClassificationComplete={handleClassificationComplete}
+            />
+            <ResultsSection
+              prediction={currentPrediction}
+              confidence={currentConfidence}
+            />
+            <HistorySection
+              history={history}
+              onClearHistory={(id) => handleClearHistory(id)}
+            />
             <InfoSection />
           </div>
         </main>
@@ -58,4 +74,4 @@ function App() {
   );
 }
 
-export default App
+export default App;

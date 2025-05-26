@@ -80,7 +80,7 @@ const UploadSection: React.FC<UploadSectionProps> = ({ onClassificationComplete 
     }
 
     try {
-      const res = await fetch('http://192.168.0.107:5000/predecir', {
+      const res = await fetch('http://192.168.1.132:5000/predecir', {
         method: 'POST',
         body: formData,
       });
