@@ -7,17 +7,6 @@ import papelImg from "../assets/papel.png";
 import plasticoImg from "../assets/plastico.png";
 import vidrioImg from "../assets/vidrio.png";
 import { History, Trash2 } from "lucide-react";
-import { 
-  fadeIn, 
-  fadeInLeft, 
-  fadeInUp, 
-  hoverScale, 
-  hoverScaleLarge, 
-  rotateAnimation, 
-  longTransition, 
-  delays,
-  animatePresenceConfig 
-} from "../utils/animations";
 
 interface HistoryItem {
   id: string;
@@ -73,20 +62,21 @@ const HistorySection: React.FC<HistorySectionProps> = ({
   if (history.length === 0) {
     return (
       <motion.section
-        variants={fadeInUp}
-        initial="initial"
-        animate="animate"
-        transition={longTransition}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
         id="history"
         className="py-8"
       >
         <motion.div
-          variants={hoverScale}
-          whileHover="hover"
+          whileHover={{ scale: 1.02 }}
           className="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden transition-colors duration-300"
         >
           <div className="p-6 text-center">
-            <motion.div variants={rotateAnimation}>
+            <motion.div
+              animate={{ rotate: [0, 10, -10, 0] }}
+              transition={{ duration: 1, repeat: Infinity, repeatDelay: 2 }}
+            >
               <History className="w-8 h-8 mx-auto text-green-500 mb-2" />
             </motion.div>
             <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-2">
@@ -104,25 +94,22 @@ const HistorySection: React.FC<HistorySectionProps> = ({
 
   return (
     <motion.section
-      variants={fadeInUp}
-      initial="initial"
-      animate="animate"
-      transition={longTransition}
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
       id="history"
       className="py-8"
     >
       <motion.div
-        variants={fadeIn}
-        initial="initial"
-        animate="animate"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
         className="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden transition-colors duration-300"
       >
         <div className="p-6">
           <motion.div
-            variants={fadeInLeft}
-            initial="initial"
-            animate="animate"
-            transition={{ delay: delays.short }}
+            initial={{ x: -20, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ delay: 0.2 }}
             className="flex justify-between items-center mb-6"
           >
             <div className="flex items-center">
@@ -134,21 +121,19 @@ const HistorySection: React.FC<HistorySectionProps> = ({
           </motion.div>
 
           <div className="space-y-4">
-            <AnimatePresence {...animatePresenceConfig}>
+            <AnimatePresence>
               {history.map((item, index) => (
                 <motion.div
                   key={item.id}
-                  variants={fadeInLeft}
-                  initial="initial"
-                  animate="animate"
-                  exit="exit"
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: 20 }}
                   transition={{ delay: index * 0.1 }}
-                  whileHover="hover"
+                  whileHover={{ scale: 1.02 }}
                   className="flex items-center space-x-4 p-4 bg-gray-50 dark:bg-gray-700/50 rounded-lg transition-colors duration-300"
                 >
                   <motion.div
-                    variants={hoverScale}
-                    whileHover="hover"
+                    whileHover={{ scale: 1.1 }}
                     className="w-16 h-16 rounded-lg overflow-hidden bg-gray-200 dark:bg-gray-600"
                   >
                     <img
@@ -161,8 +146,7 @@ const HistorySection: React.FC<HistorySectionProps> = ({
                   <div className="flex-grow">
                     <div className="flex items-center space-x-2">
                       <motion.div
-                        variants={hoverScale}
-                        whileHover="hover"
+                        whileHover={{ scale: 1.1 }}
                         className={`p-1.5 rounded-lg ${getColorClass(
                           item.prediction
                         )}`}
@@ -181,9 +165,8 @@ const HistorySection: React.FC<HistorySectionProps> = ({
                     </p>
                   </div>
                   <motion.button
-                    variants={hoverScaleLarge}
-                    whileHover="hover"
-                    whileTap="tap"
+                    whileHover={{ scale: 1.2 }}
+                    whileTap={{ scale: 0.9 }}
                     onClick={() => onClearHistory(item.id)}
                     className="text-red-500 hover:text-red-600 dark:text-red-400 dark:hover:text-red-300 transition-colors duration-200"
                   >
