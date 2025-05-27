@@ -16,6 +16,8 @@ import {
   animatePresenceConfig 
 } from '../utils/animations';
 
+import { API_ROUTES } from '../services/api.config';
+
 interface UploadSectionProps {
   onClassificationComplete: (prediction: string, confidence: number, imageUrl: string) => void;
   onImageRemove: () => void;
@@ -95,7 +97,7 @@ const UploadSection: React.FC<UploadSectionProps> = ({ onClassificationComplete,
     }
 
     try {
-      const res = await fetch('http://192.168.1.132:5000/predecir', {
+      const res = await fetch(API_ROUTES.PREDICT, {
         method: 'POST',
         body: formData,
       });
@@ -122,7 +124,13 @@ const UploadSection: React.FC<UploadSectionProps> = ({ onClassificationComplete,
   }, [webcamRef]);
 
   const toggleWebcam = () => {
-    setIsWebcamActive(!isWebcamActive);
+    const newState = !isWebcamActive;
+    setIsWebcamActive(newState);
+
+    if (!newState) {
+      onImageRemove();
+    }
+
     if (image) {
       handleRemoveImage();
     }
